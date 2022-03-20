@@ -3,6 +3,7 @@ package email;
 import business.User;
 import data.UserDB;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.servlet.*;
@@ -19,32 +20,56 @@ public class addToEmailList extends HttpServlet {
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String emailAddress = request.getParameter("emailAddress");
-        String[] musics=request.getParameterValues("music");
-        List<String> list=Arrays.asList(musics);
+        String url = "";
+        String[] musics = request.getParameterValues("music");
+        List<String> list = Arrays.asList(musics);
+
         // get a relative file name
         ServletContext sc = getServletContext();
         String path = sc.getRealPath("/WEB-INF/EmailList.txt");
-        
+        String message1 = "", message2 = "", message3 = "";
+        boolean ok = true;
         //validate input form
-        
-        
-        
-        // use regular Java objects to write the data to a file
-        User user = new User(firstName, lastName, emailAddress,list);
-        UserDB.insert(user,path);
-        String musicOut="";
-        for(String music:list){
-            musicOut+=music+" ";
+        if (firstName.length() == 0) {
+          
+            message1 = "*Please input first name";
+            ok = false;
         }
-        System.out.println(list);
-        
-        
-        
+        if (lastName.length() == 0) {
+            
+            message2 = "Please input last name";
+            ok = false;
+        }
+        if (emailAddress.matches("\\w+@\\w+\\.com$") == false) {
+           
+            message3 = "Please check the email!";
+            ok = false;
+        }
+        if (ok == true) {
+            url = "/display_email_entry.jsp";
+            // use regular Java objects to write the data to a file
+            User user = new User(firstName, lastName, emailAddress, list);
+            String musicOut = "";
+            UserDB.insert(user, path);
+            
+
+            for (String music : list) {
+                musicOut += music + " ";
+            }
+            request.setAttribute("user", user);
+            request.setAttribute("list_music", musicOut);
+        } else {
+            url = "/index.jsp";
+            User user=new User(firstName, lastName, emailAddress, list);
+            request.setAttribute("user", user);
+        }
+
         // send response to browser
-       request.setAttribute("user", user);
-       request.setAttribute("list_music", musicOut);
-       String url="/display_email_entry.jsp";
-       sc.getRequestDispatcher(url).forward(request, response);
+        
+        request.setAttribute("message1", message1);
+        request.setAttribute("message2", message2);
+        request.setAttribute("message3", message3);
+        sc.getRequestDispatcher(url).forward(request, response);
     }
 
     protected void doGet(
