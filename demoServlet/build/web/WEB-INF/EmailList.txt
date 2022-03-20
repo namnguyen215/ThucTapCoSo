@@ -1,0 +1,7 @@
+cxv|czx|ads|country, bluegrass
+xzc|dsa|cxz|rock, country
+xcz|sad|sad|country, bluegrass
+czx|xzc|das|country, bluegrass
+FDS|ads|ads|country, bluegrass
+cxz|zcx|xzc|country
+zcx|zcxx|zxc|country, bluegrass
