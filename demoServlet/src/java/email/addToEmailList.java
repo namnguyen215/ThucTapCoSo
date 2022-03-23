@@ -12,6 +12,9 @@ import javax.servlet.http.*;
 public class addToEmailList extends HttpServlet {
 
     //Lay data tu request va tra ve response
+//    public boolean checkExistEmail(){
+//    
+//    }
     protected void doPost(
             HttpServletRequest request,
             HttpServletResponse response)
@@ -22,28 +25,34 @@ public class addToEmailList extends HttpServlet {
         String emailAddress = request.getParameter("emailAddress");
         String url = "";
         String[] musics = request.getParameterValues("music");
-        List<String> list = Arrays.asList(musics);
+        List<String> list;
+        if(musics!=null)
+            list = Arrays.asList(musics);
+        else list=null;
 
         // get a relative file name
         ServletContext sc = getServletContext();
         String path = sc.getRealPath("/WEB-INF/EmailList.txt");
-        String message1 = "", message2 = "", message3 = "";
+        String message1 = "", message2 = "", message3 = "", message4 = "";
         boolean ok = true;
         //validate input form
         if (firstName.length() == 0) {
-          
+
             message1 = "*Please input first name";
             ok = false;
         }
         if (lastName.length() == 0) {
-            
+
             message2 = "Please input last name";
             ok = false;
         }
         if (emailAddress.matches("\\w+@\\w+\\.com$") == false) {
-           
+
             message3 = "Please check the email!";
             ok = false;
+        }
+        if (list==null) {
+            message4 = "Please fill the check box";
         }
         if (ok == true) {
             url = "/display_email_entry.jsp";
@@ -51,7 +60,6 @@ public class addToEmailList extends HttpServlet {
             User user = new User(firstName, lastName, emailAddress, list);
             String musicOut = "";
             UserDB.insert(user, path);
-            
 
             for (String music : list) {
                 musicOut += music + " ";
@@ -60,15 +68,18 @@ public class addToEmailList extends HttpServlet {
             request.setAttribute("list_music", musicOut);
         } else {
             url = "/index.jsp";
-            User user=new User(firstName, lastName, emailAddress, list);
+            User user = new User(firstName, lastName, emailAddress, list);
             request.setAttribute("user", user);
         }
 
+;
+       
         // send response to browser
-        
         request.setAttribute("message1", message1);
         request.setAttribute("message2", message2);
         request.setAttribute("message3", message3);
+        request.setAttribute("message4", message4);
+        request.setAttribute("list", list);
         sc.getRequestDispatcher(url).forward(request, response);
     }
 
