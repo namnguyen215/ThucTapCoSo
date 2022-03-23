@@ -12,9 +12,6 @@ import javax.servlet.http.*;
 public class addToEmailList extends HttpServlet {
 
     //Lay data tu request va tra ve response
-//    public boolean checkExistEmail(){
-//    
-//    }
     protected void doPost(
             HttpServletRequest request,
             HttpServletResponse response)
@@ -26,10 +23,13 @@ public class addToEmailList extends HttpServlet {
         String url = "";
         String[] musics = request.getParameterValues("music");
         List<String> list;
-        if(musics!=null)
+        
+        if (musics != null) {
             list = Arrays.asList(musics);
-        else list=null;
-
+        } else {
+            list = null;
+        }
+        User user = new User(firstName, lastName, emailAddress, list);
         // get a relative file name
         ServletContext sc = getServletContext();
         String path = sc.getRealPath("/WEB-INF/EmailList.txt");
@@ -51,13 +51,18 @@ public class addToEmailList extends HttpServlet {
             message3 = "Please check the email!";
             ok = false;
         }
-        if (list==null) {
+        if (list == null) {
             message4 = "Please fill the check box";
+            ok=false;
+        }
+        if (UserDB.checkExistEmail(user, path) == true) {
+                message3="Email has existed";
+                ok=false;
         }
         if (ok == true) {
             url = "/display_email_entry.jsp";
             // use regular Java objects to write the data to a file
-            User user = new User(firstName, lastName, emailAddress, list);
+            
             String musicOut = "";
             UserDB.insert(user, path);
 
@@ -68,12 +73,10 @@ public class addToEmailList extends HttpServlet {
             request.setAttribute("list_music", musicOut);
         } else {
             url = "/index.jsp";
-            User user = new User(firstName, lastName, emailAddress, list);
             request.setAttribute("user", user);
         }
+        ;
 
-;
-       
         // send response to browser
         request.setAttribute("message1", message1);
         request.setAttribute("message2", message2);
