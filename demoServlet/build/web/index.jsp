@@ -21,8 +21,11 @@
             String message4 = (String) request.getAttribute("message4");%>
         <%User user = (User) request.getAttribute("user");%>
         <%List<String> list=(List<String>)request.getAttribute("list");
-            if(list==null) list=new ArrayList<>();%>   
+            if(list==null) list=new ArrayList<>();
+         String youremail=(String)session.getAttribute("email");
+         if(youremail==null || youremail.equals("")) youremail="Not Logged";%>   
         <h1>Join our email list</h1>
+        <p>Your email address: <%=youremail%></p>
         <p>To join our email list, enter your name and
             email address below. <br>
             Then, click on the Submit button.</p>

@@ -8,6 +8,7 @@ package data;
 import business.User;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -53,6 +54,12 @@ public class UserDB {
         }
         myReader.close();
         return false;
+    }
+    
+    public static User getUser(String emailAddress,String path) throws FileNotFoundException{
+        File file = new File(path);
+        Scanner myReader = new Scanner(file);
+        return null;
     }
 
 }

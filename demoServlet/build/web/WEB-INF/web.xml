@@ -3,7 +3,15 @@
     <servlet>
         <servlet-name>addToEmailList</servlet-name>
         <servlet-class>email.addToEmailList</servlet-class>
+        <init-param>
+            <param-name>linkEmailList</param-name>
+            <param-value>/WEB-INF/EmailList.txt</param-value>
+        </init-param>
     </servlet>
+<!--    <context-param>
+        <param-name>linkEmailList</param-name>
+        <param-value>/WEB-INF/EmailList.txt</param-value>
+    </context-param>-->
     <servlet-mapping>
         <servlet-name>addToEmailList</servlet-name>
         <url-pattern>/addToEmailList</url-pattern>

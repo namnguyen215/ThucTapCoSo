@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import util.CookieUtil;
 
 public class addToEmailList extends HttpServlet {
 
@@ -32,8 +33,10 @@ public class addToEmailList extends HttpServlet {
         User user = new User(firstName, lastName, emailAddress, list);
         // get a relative file name
         ServletContext sc = getServletContext();
+//        String path = getServletContext().getInitParameter("/WEB-INF/EmailList.txt");
         String path = this.getServletConfig().getInitParameter("linkEmailList");
         path = getServletContext().getRealPath(path);
+//        String path=sc.getRealPath("/WEB-INF/EmailList.txt");
         System.out.println(path);
         String message1 = "", message2 = "", message3 = "", message4 = "";
         boolean ok = true;
@@ -71,18 +74,19 @@ public class addToEmailList extends HttpServlet {
             for (String music : list) {
                 musicOut += music + " ";
             }
-            request.setAttribute("user", user);
+            Cookie emailCookie = new Cookie("emailCookie", emailAddress);
+            //set age up to 1 years
+            emailCookie.setMaxAge(60 * 60 * 24 * 365);
+            emailCookie.setPath("/");
+            response.addCookie(emailCookie);
             request.setAttribute("list_music", musicOut);
 
         } else {
             url = "/index.jsp";
-            request.setAttribute("user", user);
         }
-        
-        HttpSession session = request.getSession();
-        session.setAttribute("email", user.getEmailAddress());
-
-
+        request.setAttribute("user", user);
+//        HttpSession session = request.getSession();
+//        session.setAttribute("email", user.getEmailAddress());
 
         // send response to browser
         request.setAttribute("message1", message1);
