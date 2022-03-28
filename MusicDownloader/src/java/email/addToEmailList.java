@@ -22,21 +22,13 @@ public class addToEmailList extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String emailAddress = request.getParameter("emailAddress");
         String url = "";
-        String[] musics = request.getParameterValues("music");
-        List<String> list;
 
-        if (musics != null) {
-            list = Arrays.asList(musics);
-        } else {
-            list = null;
-        }
-        User user = new User(firstName, lastName, emailAddress, list);
+        User user = new User(firstName, lastName, emailAddress);
         // get a relative file name
         ServletContext sc = getServletContext();
-//        String path = getServletContext().getInitParameter("/WEB-INF/EmailList.txt");
-        String path = this.getServletConfig().getInitParameter("linkEmailList");
-        path = getServletContext().getRealPath(path);
-//        String path=sc.getRealPath("/WEB-INF/EmailList.txt");
+        String path
+                = sc.getRealPath("WEB-INF/EmailList.txt");
+
         System.out.println(path);
         String message1 = "", message2 = "", message3 = "", message4 = "";
         boolean ok = true;
@@ -56,44 +48,33 @@ public class addToEmailList extends HttpServlet {
             message3 = "*Please check the email!";
             ok = false;
         }
-        if (list == null) {
-            message4 = "*Please fill the check box";
-            ok = false;
-        }
+
         if (UserDB.checkExistEmail(user, path) == true) {
             message3 = "*Email has existed";
             ok = false;
         }
         if (ok == true) {
-            url = "/display_email_entry.jsp";
-            // use regular Java objects to write the data to a file
-
-            String musicOut = "";
             UserDB.insert(user, path);
-
-            for (String music : list) {
-                musicOut += music + " ";
-            }
             Cookie emailCookie = new Cookie("emailCookie", emailAddress);
             //set age up to 1 years
             emailCookie.setMaxAge(60 * 60 * 24 * 365);
             emailCookie.setPath("/");
             response.addCookie(emailCookie);
-            request.setAttribute("list_music", musicOut);
 
         } else {
             url = "/index.jsp";
         }
-        request.setAttribute("user", user);
-//        HttpSession session = request.getSession();
-//        session.setAttribute("email", user.getEmailAddress());
+        //request.setAttribute("user", user);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        String productCode = (String) session.getAttribute("productCode");
+        url = "/" + productCode + "_download.jsp";
 
         // send response to browser
         request.setAttribute("message1", message1);
         request.setAttribute("message2", message2);
         request.setAttribute("message3", message3);
         request.setAttribute("message4", message4);
-        request.setAttribute("list", list);
         getServletContext().getRequestDispatcher(url).forward(request, response);
     }
 

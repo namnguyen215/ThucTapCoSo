@@ -26,15 +26,7 @@ public class UserDB {
         File file = new File(path);
         PrintWriter out = new PrintWriter(
                 new FileWriter(file, true));
-        List<String> list = user.getList();
         String content = user.getEmailAddress() + "|" + user.getFirstName() + "|" + user.getLastName() + "|";
-        for (int i = 0; i < list.size(); i++) {
-            if (i != list.size() - 1) {
-                content += list.get(i) + ", ";
-            } else {
-                content += list.get(i);
-            }
-        }
         out.println(content);
         out.close();
 
@@ -59,6 +51,14 @@ public class UserDB {
     public static User getUser(String emailAddress,String path) throws FileNotFoundException{
         File file = new File(path);
         Scanner myReader = new Scanner(file);
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            String[] email=data.split("\\|");
+            if(emailAddress.equalsIgnoreCase(email[0])){
+                User user=new User(email[2],email[1],email[0]);
+                return user;
+            }
+        }
         return null;
     }
 

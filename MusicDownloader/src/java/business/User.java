@@ -16,18 +16,16 @@ import java.util.List;
 public class User {
 
     private String firstName, lastName, emailAddress;
-    private List<String> list=new ArrayList<>();
     public User() {
         firstName = "";
         lastName = "";
         emailAddress = "";
     }
 
-    public User(String firstName, String lastName, String emailAddress, List<String> arr) {
+    public User(String firstName, String lastName, String emailAddress) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailAddress = emailAddress;
-        this.list=arr;
     }
 
     public String getFirstName() {
@@ -54,12 +52,6 @@ public class User {
         this.emailAddress = emailAddress;
     }
 
-    public List<String> getList() {
-        return list;
-    }
 
-    public void setList(List<String> list) {
-        this.list = list;
-    }
     
 }
