@@ -39,12 +39,10 @@ public class addToEmailList extends HttpServlet {
         boolean ok = true;
         //validate input form
         if (firstName.length() == 0) {
-
             message1 = "*Please input first name";
             ok = false;
         }
         if (lastName.length() == 0) {
-
             message2 = "*Please input last name";
             ok = false;
         }

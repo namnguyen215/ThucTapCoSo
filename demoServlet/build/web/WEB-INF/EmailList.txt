@@ -5,3 +5,4 @@ demao@mail.com|zxc|zcx|rock
 vcz@asf.com|xcz|cxz|country
 cxz@mail.com|Nguyen|Nam|country
 email1@demo.com|name1|last1|rock, country
+nam@mail.com|nam|xzc|country, bluegrass

@@ -26,8 +26,8 @@ public class UserDB {
         File file = new File(path);
         PrintWriter out = new PrintWriter(
                 new FileWriter(file, true));
-        String content = user.getEmailAddress() + "|" + user.getFirstName() + "|" + user.getLastName() + "|";
-        out.println(content);
+        String content = user.getEmailAddress() + "|" + user.getFirstName() + "|" + user.getLastName();
+        out.println(content); 
         out.close();
 
     }
