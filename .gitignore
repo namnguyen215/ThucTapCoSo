@@ -26,3 +26,8 @@ hs_err_pid*
 /demoCookie/dist/
 /MusicDownloader/nbproject/private/
 /MusicDownloader/build/
+/demoJDBC/nbproject/private/
+/demoJDBC/build/
+/SQLInjectionDemo/nbproject/private/
+/SQLInjectionDemo/build/
+/SQLInjectionDemo/dist/

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>addToEmailList</servlet-name>
+        <servlet-class>email.addToEmailList</servlet-class>
+        <init-param>
+            <param-name>linkEmailList</param-name>
+            <param-value>/WEB-INF/EmailList.txt</param-value>
+        </init-param>
+    </servlet>
+<!--    <context-param>
+        <param-name>linkEmailList</param-name>
+        <param-value>/WEB-INF/EmailList.txt</param-value>
+    </context-param>-->
+    <servlet-mapping>
+        <servlet-name>addToEmailList</servlet-name>
+        <url-pattern>/addToEmailList</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_404.jsp</location>
+    </error-page>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>            
+    </welcome-file-list>
+</web-app>
