@@ -21,6 +21,7 @@ import java.util.logging.Logger;
  * @author NamNguyen
  */
 public class DAO extends DBContext {
+    
 
     public List<User> getAll() {
         List<User> list = new ArrayList<>();
@@ -60,11 +61,14 @@ public class DAO extends DBContext {
     public User getUserByUsername(String username) {
         User user = null;
 
-        String query = "Select * from login where username= '" + username+"'";
+//        String query = "Select * from login where username= '" + username+"'";
+        String query="Select * from login where username= ?";
         System.out.println(query);
         try {
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, username);
             ResultSet users = ps.executeQuery();
+            System.out.println(users);
             while (users.next()) {
                 user = new User();
                 user.setUsername(users.getString("username"));
@@ -77,10 +81,10 @@ public class DAO extends DBContext {
         return user;
     }
 
-//    public static void main(String[] args) {
-//        DAO jdbc = new DAO();
-//        User user = jdbc.getUserByUsername("nam");
-//        System.out.println(user);
-//    }
+    public static void main(String[] args) {
+        DAO jdbc = new DAO();
+        User user = jdbc.getUserByUsername("nam");
+        System.out.println(user.getPassword());
+    }
 
 }

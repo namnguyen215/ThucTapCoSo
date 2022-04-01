@@ -3,6 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package login;
 
 import business.User;
@@ -28,18 +33,22 @@ public class Login extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "";
+        String url = "/index.jsp";
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println(username);
+        System.out.println(password);
         String message1 = "", message2 = "";
+        
         DAO database = new DAO();
-
-        if (username==null || password == null) {
+        
+        System.out.println(database.getUserByUsername("nam"));
+        if (username.length()==0 || password.length() == 0) {
             url = "/index.jsp";
             message1 = "Please type in the username!";
             message2 = "Please type in the username!";
-        } else {
+        }
+        else {
             User user = database.getUserByUsername(username);
             if (user == null) {
                 url = "/login_successful.jsp";

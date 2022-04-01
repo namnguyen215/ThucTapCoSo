@@ -13,7 +13,7 @@
 
     <body>
         <h1>Demo SQL Injection</h1>
-        <form action="Login" method="get">
+        <form action="Login" method="post">
             <table cellspacing="5" border="0">
                 <tr>
                     <td align="right">Username:</td>
