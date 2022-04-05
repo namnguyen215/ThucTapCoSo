@@ -1,0 +1,25 @@
+SMAP
+trangchu_jsp.java
+JSP
+*S JSP
+*F
++ 0 trangchu.jsp
+view/client/trangchu.jsp
++ 1 header.jsp
+view/client/header.jsp
++ 2 footer.jsp
+view/client/footer.jsp
+*L
+2,17:62
+2#1,88:79
+18#0,168:166
+185:593,11
+186,4:604
+190:608,3
+191,7:611
+198,2:618,3
+200,8:624
+207,102:336
+2#2,134:438
+308#0,5:571
+*E

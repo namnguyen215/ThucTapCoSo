@@ -1,0 +1,26 @@
+SMAP
+baibao_jsp.java
+JSP
+*S JSP
+*F
++ 0 baibao.jsp
+view/client/baibao.jsp
++ 1 header.jsp
+view/client/header.jsp
++ 2 footer.jsp
+view/client/footer.jsp
+*L
+2,14:50
+2#1,13:64
+15,5:78
+19,2:83
+21,4:86
+24,2:90
+26,4:93
+29,2:97
+31,4:100
+34,76:104
+15#0,26:179
+2#2,134:205
+40#0,4:338
+*E

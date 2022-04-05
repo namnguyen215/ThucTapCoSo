@@ -1,2 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/demoJDBC"/>
+  <Resource name="jdbc/WallyDB" auth="Container"
+            type="javax.sql.DataSource" username="sa" password="123"
+            driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver" 
+            url="jdbc:sqlserver://localhost:1433;DatabaseName= demoJDBC;SelectMethod=cursor;"
+            maxActive="8" 
+            />
+</Context>

@@ -3,6 +3,8 @@ package email;
 import business.User;
 import data.UserDB;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -81,7 +83,8 @@ public class addToEmailList extends HttpServlet {
         session.setAttribute("email", user.getEmailAddress());
 
 
-
+        LocalDate time=LocalDate.now();
+        request.setAttribute("date", time);
         // send response to browser
         request.setAttribute("message1", message1);
         request.setAttribute("message2", message2);

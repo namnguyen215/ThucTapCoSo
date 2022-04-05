@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/thayDuc"/>
+<Resource name="jdbc/confluence" auth="Container" type="javax.sql.DataSource"
+    username="sa"
+    password="123"
+    driverClassName="net.sourceforge.jtds.jdbc.Driver"
+    url="jdbc:jtds:sqlserver://localhost:1433/demoJDBC"
+    maxTotal="25"
+    maxIdle="10"
+    validationQuery="select 1" />
