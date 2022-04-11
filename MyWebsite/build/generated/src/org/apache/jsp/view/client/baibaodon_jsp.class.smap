@@ -1,0 +1,28 @@
+SMAP
+baibaodon_jsp.java
+JSP
+*S JSP
+*F
++ 0 baibaodon.jsp
+view/client/baibaodon.jsp
++ 1 header.jsp
+view/client/header.jsp
++ 2 footer.jsp
+view/client/footer.jsp
+*L
+2,14:50
+2#1,14:64
+16,5:79
+20,2:84
+22,4:87
+25,2:91
+27,4:94
+30,2:98
+32,4:101
+35,76:105
+15#0,10:180
+25:190,3
+26,80:193
+2#2,134:273
+105#0,5:406
+*E

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -13,8 +13,15 @@ package login;
 import business.User;
 import dal.DAO;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,23 +40,29 @@ public class Login extends HttpServlet {
             HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
+
+
+
         String url = "/index.jsp";
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         System.out.println(username);
         System.out.println(password);
         String message1 = "", message2 = "";
+
         
+
         DAO database = new DAO();
-        
+
         System.out.println(database.getUserByUsername("nam"));
-        if (username.length()==0 || password.length() == 0) {
+        if (username.length() == 0 || password.length() == 0) {
             url = "/index.jsp";
             message1 = "Please type in the username!";
             message2 = "Please type in the username!";
-        }
-        else {
+        } else {
             User user = database.getUserByUsername(username);
+            
+            
             if (user == null) {
                 url = "/login_successful.jsp";
                 database.insert(user);
@@ -71,4 +84,12 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
         doPost(request, response);
     }
+
+    public static void main(String[] args) {
+        DAO jdbc = new DAO();
+        User user = jdbc.getUserByUsername("nam");
+        System.out.println(user.getPassword());
+        System.out.println("-----------" + jdbc.getAll().size());
+    }
+
 }
